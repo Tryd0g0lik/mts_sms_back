@@ -10,6 +10,7 @@ from dotenv_ import (PROJECT_HOST,
                      PROJECT_PROTOCOL,
                      PROJECT_SECRET_KEY)
 from flask_bootstrap import Bootstrap
+# def flask_sms():
 app_sms = Flask(__name__,
                 template_folder="templates")
 app_sms.config.from_object(__name__)
@@ -20,6 +21,9 @@ app_sms.config["PROJECT_PORT"] = PROJECT_PORT
 app_sms.config["PROJECT_PROTOCOL"] = PROJECT_PROTOCOL
 app_sms.config["PROJECT_SECRET_KEY"] = PROJECT_SECRET_KEY
 
+# return app_sms
+
+# app_sms = flask_sms()
 # CSRF token
 csrf = CSRFProtect(app_sms)
 # OTHERS
@@ -28,3 +32,5 @@ bcrypt = Bcrypt(app_sms)
 
 app_type = type(app_sms)
 
+# if __name__ == '__main__':
+#     app_type.run(debug=True)

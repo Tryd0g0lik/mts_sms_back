@@ -10,7 +10,7 @@ media
 backup
 # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
 # in your Git repository. Update and uncomment the following line accordingly.
-# <django-sms-postman-name>/staticfiles/
+# <django-sms_postman-name>/staticfiles/
 
 ### Django.Python Stack ###
 # Byte-compiled / optimized / DLL files
@@ -114,12 +114,12 @@ poetry.lock
 # pdm
 #   Similar to Pipfile.lock, it is generally recommended to include pdm.lock in version control.
 #pdm.lock
-#   pdm stores sms-postman-wide configurations in .pdm.toml, but it is recommended to not include it
+#   pdm stores sms_postman-wide configurations in .pdm.toml, but it is recommended to not include it
 #   in version control.
 #   https://pdm.fming.dev/#use-with-ide
 .pdm.toml
 
-# PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-sms-postman/pdm
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-sms_postman/pdm
 __pypackages__/
 
 # Celery stuff
@@ -138,11 +138,11 @@ ENV/
 env.bak/
 venv.bak/
 
-# Spyder sms-postman settings
+# Spyder sms_postman settings
 .spyderproject
 .spyproject
 
-# Rope sms-postman settings
+# Rope sms_postman settings
 .ropeproject
 
 # mkdocs documentation
@@ -220,11 +220,11 @@ Python
 
 # pdm
 #   Similar to Pipfile.lock, it is generally recommended to include pdm.lock in version control.
-#   pdm stores sms-postman-wide configurations in .pdm.toml, but it is recommended to not include it
+#   pdm stores sms_postman-wide configurations in .pdm.toml, but it is recommended to not include it
 #   in version control.
 #   https://pdm.fming.dev/#use-with-ide
 
-# PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-sms-postman/pdm
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-sms_postman/pdm
 
 # Celery stuff
 
@@ -232,9 +232,9 @@ Python
 
 # Environments
 
-# Spyder sms-postman settings
+# Spyder sms_postman settings
 
-# Rope sms-postman settings
+# Rope sms_postman settings
 
 # mkdocs documentation
 
