@@ -19,5 +19,5 @@ from sms_postman.views import app_sms
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     # asyncio.run(print_hi())
-    app_sms.run(debug=True)
+    app_sms.run(debug=False)
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
