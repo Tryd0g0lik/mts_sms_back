@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Отправка SMS</title>
+
+<script defer src="{{ url_for('static', filename='scripts/main-main-a4d53f853b37acef5072.js') }}"></script></head>
+<body>
+    <div class="container">
+        <h1>Отправка SMS</h1>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul class="flashes">
+              {% for message in messages %}
+                <li>{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+        <form id="smsForm" method="POST">
+          {{ form.csrf_token }}
+          <div class="form-group">
+            {{ form.mobil_number.label(class="form-check-label") }}
+            {{ form.mobil_number() }}
+            {% for error in form.mobil_number.errors %}
+            <div class="text-danger">{{ error }}</div>
+            {% endfor %}
+          </div>
+
+          <div class="form-group">
+            {{ form.text_message.label(class="form-check-label") }}
+            {{ form.text_message() }}
+            {% for error in form.text_message.errors %}
+            <div class="text-danger">{{ error }}</div>
+            {% endfor %}
+          </div>
+          {{ form.submit() }}
+        </form>
+    </div>
+
+</body>
+</html>

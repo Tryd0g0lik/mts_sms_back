@@ -19,7 +19,8 @@ app_sms.config.from_object(__name__)
 app_sms.config["PROJECT_HOST"] = PROJECT_HOST
 app_sms.config["PROJECT_PORT"] = PROJECT_PORT
 app_sms.config["PROJECT_PROTOCOL"] = PROJECT_PROTOCOL
-app_sms.config["PROJECT_SECRET_KEY"] = PROJECT_SECRET_KEY
+
+app_sms.config["SECRET_KEY"] = PROJECT_SECRET_KEY
 
 # return app_sms
 

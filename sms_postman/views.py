@@ -8,6 +8,9 @@ from .apps import (app_sms, csrf)
 from dotenv_ import (API_KEY, API_URL, PHONE_SEND)
 from flask_wtf.csrf import CSRFError
 
+from .forms.form_message import GetFormSmsMessage
+
+
 @app_sms.errorhandler(CSRFError)
 def handle_csrf_error(e):
     return render_template('csrf_error.html', reason=e.description), 400
@@ -15,8 +18,9 @@ def handle_csrf_error(e):
 @app_sms.route('/', methods=['GET', 'POST'])
 @csrf.exempt
 def index():
+    form = GetFormSmsMessage()
     # csrf_token = csrf # generate_csrf()
-    if request.method == 'POST':
+    if request.method == 'POST' and form.validate_on_submit():
         # EXOLVE_API_KEY = generate_csrf()
         number = request.form.get('number')
         text = request.form.get('text')
@@ -33,7 +37,7 @@ def index():
         else:
             flash(f'Ошибка при отправке SMS: {response.json().get("message", "Неизвестная ошибка")}')
     
-    return render_template('index.html', )
+    return render_template('index.html', form=form )
 
 def send_sms(api_key, number, text):
     headers = {'Authorization': f'Bearer {api_key}'}
