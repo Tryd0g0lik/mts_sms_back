@@ -1,24 +1,41 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>Отправка SMS</title>
+{% extends "bootstrap/base.html" %}
+<!-- https://pythonhosted.org/Flask-Bootstrap/basic-usage.html#available-blocks -->
+{% block html_attribs %}
+lang="ru"
+{% endblock %}
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('.static', filename='styles/style.css')}}">
+{% endblock %}
+{% block metas %}
+<meta name="viewpost" content="width-device-width, initial-scale=1,
+    shrink-to-fit-no">
+<meta charset="UTF-8">
+{% if csrf_token %}
+<!-- meta name="csrf-token" content="{ { csrf_token } }" -->
+{% endif %}
+{% endblock metas %}
+<title>{% block title %}Отправка SMS{% endblock title %}</title>
 
-<script defer src="{{ url_for('static', filename='scripts/main-main-a4d53f853b37acef5072.js') }}"></script></head>
-<body>
+<!DOCTYPE html>
+<html lang="ru"><head><script defer src="../static/scripts/main-main-d6a041f7eb54b4c8472c.js"></script></head>
+{% block body %}
     <div class="container">
-        <h1>Отправка SMS</h1>
-        {% with messages = get_flashed_messages() %}
-          {% if messages %}
-            <ul class="flashes">
-              {% for message in messages %}
-                <li>{{ message }}</li>
-              {% endfor %}
-            </ul>
-          {% endif %}
-        {% endwith %}
+      {% block heading %}
+      <div class="h1">
+          <h1>Отправка SMS</h1>
+        </div>
+        {% endblock heading %}
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      <ul class="flashes">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      {% endwith %}
+      {% block sms_form %}
         <form id="smsForm" method="POST">
           {{ form.csrf_token }}
           <div class="form-group">
@@ -28,7 +45,6 @@
             <div class="text-danger">{{ error }}</div>
             {% endfor %}
           </div>
-
           <div class="form-group">
             {{ form.text_message.label(class="form-check-label") }}
             {{ form.text_message() }}
@@ -38,7 +54,13 @@
           </div>
           {{ form.submit() }}
         </form>
+      {% endblock sms_form %}
     </div>
+    {% block scripts %}
+    {{super()}}
+    <script src="{{js_file_name}}">
+    </script>
+    {% endblock scripts %}
+    {% endblock body %}
 
-</body>
 </html>
