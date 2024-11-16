@@ -13,7 +13,7 @@ def receive_pathname_js_file() -> str:
     :return: str
     """
 
-    file_path = f"{os.getcwd()}./static/scripts"
+    file_path = os.getcwd() + "\\sms_postman\\static\\scripts"
     files_js_list = os.listdir(file_path)
     file_js_name = "not_JS_file.js"
     if len(files_js_list) > 0:

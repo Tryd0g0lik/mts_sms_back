@@ -7,7 +7,6 @@
  * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
  */
 /******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./src/index.ts":
@@ -16,7 +15,8 @@
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _scripts_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./scripts/index */ \"./src/scripts/index.ts\");\n\n\n//# sourceURL=webpack://sms_mts/./src/index.ts?");
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _scripts_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./scripts/index */ \"./src/scripts/index.ts\");\n/* harmony import */ var _scripts_index__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_scripts_index__WEBPACK_IMPORTED_MODULE_0__);\n\n\n//# sourceURL=webpack://sms_mts/./src/index.ts?");
 
 /***/ }),
 
@@ -24,19 +24,9 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _scr
 /*!******************************!*\
   !*** ./src/scripts/index.ts ***!
   \******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (() => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _services_handler_handlerFormSubmit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./services/handler/handlerFormSubmit */ \"./src/scripts/services/handler/handlerFormSubmit.ts\");\n/***\n * There is a listener of download a page\n */\n\ndocument.removeEventListener(\"DOMContentLoaded\", handlerMain);\ndocument.addEventListener(\"DOMContentLoaded\", handlerMain);\nfunction handlerMain() {\n  /***\n   * This is a function that is the main handler for all handlers. \n   */\n  const formHtml = document.querySelector(\"smsForm\");\n  if (formHtml === null) {\n    return false;\n  }\n  formHtml.removeEventListener(\"mousedown\", _services_handler_handlerFormSubmit__WEBPACK_IMPORTED_MODULE_0__.handlerEventSubmit);\n  formHtml.addEventListener(\"mousedown\", _services_handler_handlerFormSubmit__WEBPACK_IMPORTED_MODULE_0__.handlerEventSubmit);\n  return true;\n}\n\n//# sourceURL=webpack://sms_mts/./src/scripts/index.ts?");
-
-/***/ }),
-
-/***/ "./src/scripts/services/handler/handlerFormSubmit.ts":
-/*!***********************************************************!*\
-  !*** ./src/scripts/services/handler/handlerFormSubmit.ts ***!
-  \***********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   handlerEventSubmit: () => (/* binding */ handlerEventSubmit)\n/* harmony export */ });\nasync function handlerEventSubmit(e) {\n  /**\n   * This is a event handler of button press of the type submit.\n   * It is  event of sending sms-massege from form. \n   */\n  if (!e.type || e.type && !e.type.includes(\"mousedown\") || !e.target.type && !e.target.type.includes(\"submit\")) {\n    return false;\n  }\n  ;\n  e.preventDefault();\n  const currentTarget = e.currentTarget;\n  return true;\n}\n\n//# sourceURL=webpack://sms_mts/./src/scripts/services/handler/handlerFormSubmit.ts?");
+eval("/***\n * There is a listener of download a page\n */\n\ndocument.removeEventListener(\"DOMContentLoaded\", handlerMain);\ndocument.addEventListener(\"DOMContentLoaded\", handlerMain);\nfunction handlerMain() {\n  /***\n   * This is a function that is the main handler for all handlers. \n   */\n  return true;\n}\n\n//# sourceURL=webpack://sms_mts/./src/scripts/index.ts?");
 
 /***/ })
 
@@ -67,6 +57,18 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports

@@ -3,13 +3,13 @@ import json
 import requests
 # from flask_wtf.csrf import generate_csrf
 
-from flask import (Flask, render_template, request, jsonify, flash)
+from flask import (Flask, render_template, request, redirect, flash, url_for)
 from .apps import (app_sms, csrf)
-from dotenv_ import (API_KEY, PHONE_SEND)
+from dotenv_ import (API_KEY, PHONE_SEND, API_URL)
 from flask_wtf.csrf import CSRFError
 
-from .files import receive_pathname_js_file
-from .forms.form_message import GetFormSmsMessage
+from sms_postman.files import receive_pathname_js_file
+from sms_postman.forms.form_message import GetFormSmsMessage
 
 
 @app_sms.errorhandler(CSRFError)
@@ -20,17 +20,12 @@ def handle_csrf_error(e):
 @csrf.exempt
 def index():
     form = GetFormSmsMessage()
-    # Below, receive the JS file name.
-    js_file_name = receive_pathname_js_file
-    # csrf_token = csrf # generate_csrf()
+    js_file_name = receive_pathname_js_file()
 
 
     if request.method == 'POST' and form.validate_on_submit():
-        # EXOLVE_API_KEY = generate_csrf()
         number = request.form.get('mobil_number')
         text = request.form.get('text_message')
-        # api_key = request.form.get('api_key') or os.getenv('EXOLVE_API_KEY')  # Получение ключа из окружения или формы
-        # api_key = EXOLVE_API_KEY
 
         if not number or not text:
             flash('Пожалуйста, заполните все поля.')
@@ -40,7 +35,10 @@ def index():
         response = send_sms(API_KEY, number, text)
         if response.status_code == 200:
             flash('SMS успешно отправлено!')
-            
+            return redirect(url_for("index",
+                                    js_file_name=js_file_name,
+                                    form=form
+                                    ))
         else:
             flash(f'Ошибка при отправке SMS: \
 {response.json().get("message", "Неизвестная ошибка")}')
@@ -70,7 +68,7 @@ def send_sms(api_key, number, text):
             "destination": mobile_number,
             "text": text
         }
-    response =  requests.post("https://api.exolve.ru/messaging/v1/SendSMS",
+    response =  requests.post(API_URL,
                          json=data,
                          headers=headers)
     if response.status_code != 200:
