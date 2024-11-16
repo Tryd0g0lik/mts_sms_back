@@ -50,54 +50,28 @@ def index():
 
 def send_sms(api_key, number, text):
     headers = {'Authorization': f'Bearer {api_key}'}
+    mobile_number = number.strip()
+    # CLEAN
+    if number[0] in "+":
+        mobile_number = "".join(["7", (number.strip())[1:]])
+    if int(number[0]) == 8:
+        mobile_number = "".join(["7", (number.strip())[1:]])
+    if int(mobile_number[0]) != 7:
+        mobile_number = "7" + mobile_number
+    # CHECK
+    if not (mobile_number.startswith("79") and len(mobile_number) >= 11):
+        raise ValueError(
+            "Invalid phone number format. Must start with '79' \
+            and contain at least 11 digits."
+            )
     data = {
-        "number": PHONE_SEND,  # Замените на ваш номер отправителя
-        "destination": number,
-        "text": text
-    }
-    return requests.post(API_URL, json=data, headers=headers)
-
-
-# # def sms_routing():
-# @app_sms.route('/', methods=["GET"])
-# def index():
-#     return render_template('index.html')
-#
-# @app_sms.route("/csrf_token", methods=["GET"])
-# def get_csrf_token():
-#     pass
-#     """
-#     This CSRF-key returning by 'GET' request/
-#     :return: JSON '{"csrf_token": < csrf_key >}'
-#     """
-#     csrf_ = generate_csrf()
-#
-#     return jsonify({"csrf_token": csrf_}), 200
-#
-# @app_sms.route("/send_sms", methods=["POST"])
-# @csrf.exempt
-# def send_sms():
-#     number = request.form['number']
-#     text = request.form['text']
-#     api_key = request.form.get('api_key') or os.getenv(
-#         'EXOLVE_API_KEY'
-#         )  # Получение ключа из окружения или формы
-#     sms_data = {
-#         "number": "ваш_номер_отправителя",  # Замените на номер отправителя
-#         "destination": number,
-#         "text": text
-#     }
-#
-#     headers = {'Authorization': f'Bearer {API_KEY}'}
-#
-#     response = requests.post(url=API_URL, json=sms_data, headers=headers)
-#
-#     if response.status_code == 200:
-#         return jsonify(
-#             {"status": "success", "message": "SMS отправлено успешно!"}
-#         ), 200
-#     else:
-#         return jsonify(
-#             {"status": "error", "message": "Ошибка при отправке SMS."}
-#         ), response.status_code
-#     # return app_sms
+            "number": PHONE_SEND,  # Замените на ваш номер отправителя
+            "destination": "".join([mobile_number]),
+            "text": text
+        }
+    response =  requests.post("https://api.exolve.ru/messaging/v1/SendSMS",
+                         json=data,
+                         headers=headers)
+    if response.status_code != 200:
+        print(f"Error: {response.status_code}, Response: {response.json()}")
+    return response
