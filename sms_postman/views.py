@@ -5,7 +5,7 @@ import requests
 
 from flask import (Flask, render_template, request, jsonify, flash)
 from .apps import (app_sms, csrf)
-from dotenv_ import (API_KEY, API_URL, PHONE_SEND)
+from dotenv_ import (API_KEY, PHONE_SEND)
 from flask_wtf.csrf import CSRFError
 
 from .files import receive_pathname_js_file
@@ -40,6 +40,7 @@ def index():
         response = send_sms(API_KEY, number, text)
         if response.status_code == 200:
             flash('SMS успешно отправлено!')
+            
         else:
             flash(f'Ошибка при отправке SMS: \
 {response.json().get("message", "Неизвестная ошибка")}')
@@ -65,8 +66,8 @@ def send_sms(api_key, number, text):
             and contain at least 11 digits."
             )
     data = {
-            "number": PHONE_SEND,  # Замените на ваш номер отправителя
-            "destination": "".join([mobile_number]),
+            "number": PHONE_SEND,
+            "destination": mobile_number,
             "text": text
         }
     response =  requests.post("https://api.exolve.ru/messaging/v1/SendSMS",
