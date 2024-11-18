@@ -24,7 +24,6 @@ app_sms.config["SECRET_KEY"] = PROJECT_SECRET_KEY
 
 # return app_sms
 
-# app_sms = flask_sms()
 # CSRF token
 csrf = CSRFProtect(app_sms)
 # OTHERS
@@ -32,6 +31,3 @@ bootstrap = Bootstrap(app_sms)
 bcrypt = Bcrypt(app_sms)
 
 app_type = type(app_sms)
-
-# if __name__ == '__main__':
-#     app_type.run(debug=True)

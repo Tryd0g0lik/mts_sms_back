@@ -22,16 +22,34 @@ def index():
     form = GetFormSmsMessage()
     js_file_name = receive_pathname_js_file()
 
+    def _validate_contains_only_letters_and_digits(text):
+        """Checking symbols from message"""
+        excluded_chars = " *?!'^+%&/()=}][{$#@!~`"  # Список недопустимых символов
+        for char in text:
+            if char in excluded_chars:
+                flash(f"Символ '{char}' не разрешен.")
+                return False
+        return True
+   
 
     if request.method == 'POST' and form.validate_on_submit():
         number = request.form.get('mobil_number')
         text = request.form.get('text_message')
-
+        
         if not number or not text:
             flash('Пожалуйста, заполните все поля.')
             return render_template('index.html',
+                                   js_file_name=js_file_name,
+                                   form=form
                                    )
-
+        if not _validate_contains_only_letters_and_digits(text):
+            flash(f"Проверьте текст.")
+            return render_template(
+                'index.html',
+                js_file_name=js_file_name,
+                form=form
+                )
+        
         response = send_sms(API_KEY, number, text)
         if response.status_code == 200:
             flash('SMS успешно отправлено!')
@@ -48,6 +66,13 @@ def index():
                            form=form )
 
 def send_sms(api_key, number, text):
+    """
+    SMS sending to the (only) mobile telephone from Russia
+    :param api_key: str. Look the '.env' file.
+    :param number: str. Number ща recipient.
+    :param text: str. Text of message. Min. 3 symbol. Max.35.
+    :return: response received from a POST-request (sender of message).
+    """
     headers = {'Authorization': f'Bearer {api_key}'}
     mobile_number = number.strip()
     # CLEAN
@@ -63,12 +88,14 @@ def send_sms(api_key, number, text):
             "Invalid phone number format. Must start with '79' \
             and contain at least 11 digits."
             )
+
     data = {
             "number": PHONE_SEND,
             "destination": mobile_number,
             "text": text
         }
-    response =  requests.post(API_URL,
+    # SEND
+    response = requests.post(API_URL,
                          json=data,
                          headers=headers)
     if response.status_code != 200:
