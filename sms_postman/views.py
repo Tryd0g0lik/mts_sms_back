@@ -1,9 +1,6 @@
-import json
-
+"""Routers"""
 import requests
-# from flask_wtf.csrf import generate_csrf
-
-from flask import (Flask, render_template, request, redirect, flash, url_for)
+from flask import (render_template, request, redirect, flash, url_for)
 from .apps import (app_sms, csrf)
 from dotenv_ import (API_KEY, PHONE_SEND, API_URL)
 from flask_wtf.csrf import CSRFError

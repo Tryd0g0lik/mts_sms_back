@@ -55,3 +55,6 @@ API_URL=https://api.exolve.ru/messaging/v1/SendSMS
 Проект имеет настроенный front. В начале логику формы хотел пустить через JS. 
 Но после сделал через формы от flask.
 
+`requirements.txt` результат сборки от `poetry`.\
+Если используете `pip` удалите `pyproject.toml` 
+
