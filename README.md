@@ -1,4 +1,27 @@
 C использованием API платформы МТС Exolve. Нужно создать веб-приложение на Flask с интеграцией SMS API для отправки сообщений на указанный пользователем номер.
+# Зависимости
+```js
+python = "^3.10"
+python-dotenv = "^1.0.1"
+flask = {extras = ["async"], version = "^3.0.3"}
+flask-jwt-extended = "^4.6.0"
+flask-swagger-ui = "^4.11.1"
+flask-wtf = "^1.2.1"
+wtforms = "^3.1.2"
+flask-login = "^0.6.3"
+bcrypt-flask = "^1.0.2"
+flask-bootstrap = "^3.3.7.1"
+asyncio = "^3.4.3"
+
+autohooks >= 24.2.0
+flake8 >= 7.1.1
+pre-commit >= 3.8.0
+markdown >= 3.7
+pylint >= 3.3.1
+isort >= 5.13.2
+black >= 24.8.0
+```
+
 # Review
 Проект на:
 - *Webpack*;
